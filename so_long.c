@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:46:16 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/12/13 16:34:14 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:44:42 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	ft_putchar(char c)
 /*
 int	handle_input(int keycode, t_game *game)
 {
-	if (keycode == 0 || keycode == 123)
-	if (keycode == 1 || keycode == 125)
-	if (keycode == 2 || keycode == 124)
-	if (keycode == 13 || keycode == 126)
-	if (keycode > 0)
+	if (keycode == 0 || keycode == 123) //A Left
+	if (keycode == 1 || keycode == 125) // S Down
+	if (keycode == 2 || keycode == 124) // D Right
+	if (keycode == 13 || keycode == 126) // W Up
+	if (keycode == 53) // Esc
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	return (0);
 }
@@ -39,7 +39,7 @@ int	handle_input(int keycode, t_game *game)
 {
 	if (keycode == 53)
 	{
-		ft_putchar('X');
+		mlx_clear_window(game->mlx_ptr, game->win_ptr);
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	}
 	return (0);
@@ -48,7 +48,14 @@ int	handle_input(int keycode, t_game *game)
 int	main(void)
 {
 	t_game	game;
+	char	*hero_path;
+	void	*hero_image;
+	int		width;
+	int		height;
 
+	width = 50;
+	height = 50;
+	hero_path = "./assets/hero/idle.xpm";
 	game.mlx_ptr = mlx_init();
 	if (game.mlx_ptr == NULL)
 		return (MLX_ERROR);
@@ -60,10 +67,12 @@ int	main(void)
 	}
 
 	//Hooks//
+	hero_image = mlx_xpm_file_to_image(game.mlx_ptr, hero_path, &width, &height); 
 //	mlx_loop_hook(game.mlx_ptr, &handle_no_event, &game);
 	mlx_key_hook(game.win_ptr, handle_input, (void *)0);
 //	mlx_hook(game.win_ptr, 2, (1L << 0), handle_input, &game);
+	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, hero_image, 50, 50);
+	mlx_sync(5, a);
 	mlx_loop(game.mlx_ptr);
-//	mlx_destroy_display(mlx_ptr);
 	free(game.mlx_ptr);
 }
