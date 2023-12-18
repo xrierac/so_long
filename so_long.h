@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/12/13 16:34:11 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:24:48 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,24 @@
 
 # define MLX_ERROR 1
 
-# define W_WIDTH 1080
-# define W_HEIGHT 720
-
-typedef struct	s_game
+typedef struct	s_win
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-}	t_game;
+	int		width;
+	int		height;
+}	t_win;
+
+typedef struct	s_asset
+{
+	t_win	win;
+	void	*img_ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		endian;
+	int		size_line;
+}	t_asset;
 
 #endif
