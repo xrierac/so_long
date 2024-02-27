@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/26 16:26:22 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:53:25 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_mlx
 	int		height;
 	double	delta_time;
 	char	*path;
+	char 	*map_line;
 	char	**map;
 }	t_mlx;
 
