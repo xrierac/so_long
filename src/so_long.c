@@ -6,14 +6,16 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:28:41 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/26 17:00:12 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:32:30 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	exit_error(char *str)
+void	exit_error(char *str, char *malloced)
 {
+	if (malloced != NULL)
+		free(malloced);
 	ft_putstr_fd("so_long: Error: ", 2);
 	ft_putstr_fd(str, 2);
 	exit(EXIT_FAILURE);
