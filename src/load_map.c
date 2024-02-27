@@ -6,57 +6,83 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:33:02 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/26 17:05:34 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:53:23 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	get_size(t_mlx *mlx)
+static int	check_map(t_mlx *mlx)
 {
-	int		fd;
-	char	*line;
-	int		i;
+	int	i;
+	int	j;
 
-	line = "a";
-	fd = open(mlx->path, O_RDONLY);
-	if (fd < 0)
-		exit_error("Could not open the map\n");
 	i = -1;
-	while (line != NULL)
+	mlx->width = ft_strlen(mlx->map[0]);
+	while (mlx->map[++i])
 	{
-		line = get_next_line(fd);
-		if (i == -1)
-			mlx->width = ft_strlen(line) - 1;
-		if (line != NULL)
-			free(line);
-		i++;
+		j = -1;
+		while (mlx->map[i][++j])
+		if (i == 0 || mlx->map[i + 1] == 0)
+					if (mlx->map[i][j] != 1)
+					{
+						ft_free_array(mlx->map);
+						exit_error("Wrong map format\n", NULL)
+					}
+
+
+
+
+
+
 	}
-	mlx->height = i;
-	if (close(fd) == -1)
-		exit_error("Error closing the file\n");
+}
+
+void	split_map(t_mlx *mlx, char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (ft_inset(str[i], "10CEP\n") == 0)
+			exit_error("Wrong map format\n", str);
+		if (i < ft_strlen(str) && (str[i] == '\n' && str[i + 1] == '\n'))
+			exit_error("Wrong map format\n", str);
+	}
+	if (str[0] == '\n' || str[ft_strlen(str) - 1] == '\n')
+		exit_error("Wrong map format\n", str);
+	mlx->map = ft_split(str);
+	if (mlx->map == NULL)
+		exit_error("Malloc failed\n", str);
+	free(str);
 }
 
 void	load_map(t_mlx *mlx)
 {
 	int		fd;
-	int		i;
 	char	*str;
 	char	*tmp;
 
-	i = 0;
+	mlx->map_line = "a";
 	str = ft_strdup("");
+	if (str == NULL)
+		exit_error("Malloc failed\n", NULL);
 	fd = open(mlx->path, O_RDONLY);
 	if (fd < 0)
-		exit_error("Could not open the map\n");
-	while (i < mlx->height)
+		exit_error("Could not open the map\n", str);
+	while (mlx->map_line != NULL)
 	{
 		tmp = str;
-		str = ft_strjoin(str, get_next_line(fd));
+		mlx->map_line = get_next_line(fd);
+		str = ft_strjoin(str, mlx->map_line);
 		free(tmp);
-		i++;
+		if (mlx->map_line != NULL)
+			free(mlx->map_line);
+		if (str == NULL)
+			exit_error("Malloc failed\n", NULL);
 	}
-	mlx->map = ft_split(str, '\n');
+	split_map(mlx, str);
 	if (close(fd) == -1)
-		exit_error("Error closing the file\n");
+		exit_error("Error closing the file\n", NULL);
 }
