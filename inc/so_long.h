@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/27 12:53:25 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:37:55 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct	s_mlx
 	int		height;
 	double	delta_time;
 	char	*path;
-	char 	*map_line;
+	char 	*line;
 	char	**map;
 }	t_mlx;
 
@@ -51,10 +51,14 @@ typedef struct s_mlx_image
 	void*			context;
 }	t_mlx_image;
 
-void	exit_error(char *str);
+//Map parsing//
+int		check_map_format(t_mlx *mlx);
+int		check_map_error(t_mlx *mlx);
+int		check_path(char *str);
+
+void	exit_error(char *str, t_mlx *mlx);
 int		map_error(char *str);
 void	load_map(t_mlx *mlx);
-void	get_size(t_mlx *mlx);
 
 //get_next_line//
 
