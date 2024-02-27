@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_error.c                                        :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 09:53:38 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/27 11:50:37 by xriera-c         ###   ########.fr       */
+/*   Created: 2024/02/27 17:16:13 by xriera-c          #+#    #+#             */
+/*   Updated: 2024/02/27 17:37:48 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static int	check_format(char *str)
+int	check_map_format(t_mlx *mlx)
+{
+	int	i;
+
+	i = -1;
+	while (mlx->line[++i])
+	{
+		if (ft_inset(mlx->line[i], "10CEP\n") == 0)
+			return (-1);
+		if (i > 0 && (mlx->line[i] == '\n' && mlx->line[i - 1] == '\n'))
+			return (-1);
+	}
+	if (mlx->line[0] == '\n' || mlx->line[ft_strlen(mlx->line) - 1] == '\n')
+			return (-1);
+	return (0);
+}
+
+int	check_path(char *str)
 {
 	int		len;
 	char	*substr;
@@ -26,20 +43,15 @@ static int	check_format(char *str)
 	return (0);
 }
 
-static int	check_walls(t_mlx *mlx)
+int	check_map_error(t_mlx *mlx)
 {
-	int	i;
+	int		i;
 
 	i = -1;
-	while (++i < 
-	if (
-	if (str[0] != 1 || str[ft_strlen(str - 1)] != 1)
-		return (-1);
+	while (mlx->map[++i])
+	{
+		if (ft_strlen(mlx->map[i]) != (size_t)mlx->width)
+			return (-1);
+	}
+	return (0);
 }
-
-
-int	map_error(t_mlx *mlx)
-{
-	if (check_format(mlx->path) == -1)
-		exit_error("Wrong map name format\n");
-
