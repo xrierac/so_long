@@ -6,27 +6,50 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:16:13 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/27 17:37:48 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:45:12 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-int	check_map_format(t_mlx *mlx)
+static int check_char(t_map *map)
 {
 	int	i;
 
 	i = -1;
-	while (mlx->line[++i])
+	map->col = 0;
+	map->exit = 0;
+	map->player = 0;
+	while (map->line[++i])
 	{
-		if (ft_inset(mlx->line[i], "10CEP\n") == 0)
+		if (map->line[i] == 'C')
+		   map->col++;	
+		if (map->line[i] == 'E')
+			map->exit++;
+		if (map->line[i] == 'P')
+			map->player++;
+	}
+	if (map->col < 1 || map->exit != 1 || map->player != 1)
+	   return (-1);
+	return (0);
+}	
+
+
+int	check_map_line(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	while (map->line[++i])
+	{
+		if (ft_inset(map->line[i], "10CEP\n") == 0)
 			return (-1);
-		if (i > 0 && (mlx->line[i] == '\n' && mlx->line[i - 1] == '\n'))
+		if (i > 0 && (map->line[i] == '\n' && map->line[i - 1] == '\n'))
 			return (-1);
 	}
-	if (mlx->line[0] == '\n' || mlx->line[ft_strlen(mlx->line) - 1] == '\n')
+	if (map->line[0] == '\n' || map->line[ft_strlen(map->line) - 1] == '\n')
 			return (-1);
-	return (0);
+	return (check_char(map));
 }
 
 int	check_path(char *str)
@@ -43,14 +66,16 @@ int	check_path(char *str)
 	return (0);
 }
 
-int	check_map_error(t_mlx *mlx)
+int	check_map_error(t_map *map)
 {
 	int		i;
 
 	i = -1;
-	while (mlx->map[++i])
+	while (map->map[++i])
 	{
-		if (ft_strlen(mlx->map[i]) != (size_t)mlx->width)
+		if (ft_strlen(map->map[i]) != (size_t)map->width)
+			return (-1);
+		if (map->map[i][0] != 1 || map->map[i][map->width - 1] != 1)
 			return (-1);
 	}
 	return (0);
