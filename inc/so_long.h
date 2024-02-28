@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/27 17:37:55 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:30:45 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include "MLX42/MLX42.h"
 # include "../lib/libft/libft.h"
 
+# ifndef SQ_SIZE
+#  define SQ_SIZE 64
+# endif
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
@@ -28,37 +32,26 @@
 #  define FD_MAX 256
 # endif
 
-typedef struct	s_mlx
+typedef struct	s_map
 {
-	void	*window;
-	void	*context;
 	int		width;
 	int		height;
-	double	delta_time;
 	char	*path;
 	char 	*line;
 	char	**map;
-}	t_mlx;
-
-typedef struct s_mlx_image
-{
-	const uint32_t	width;
-	const uint32_t	height;
-	uint8_t*		pixels;
-	mlx_instance_t*	instances;
-	int32_t			count;
-	bool			enabled;
-	void*			context;
-}	t_mlx_image;
+	int		col;
+	int		exit;
+	int		player;
+}	t_map;
 
 //Map parsing//
-int		check_map_format(t_mlx *mlx);
-int		check_map_error(t_mlx *mlx);
+int		check_map_line(t_map *map);
+int		check_map_error(t_map *map);
 int		check_path(char *str);
 
-void	exit_error(char *str, t_mlx *mlx);
+void	exit_error(char *str, t_map *map);
 int		map_error(char *str);
-void	load_map(t_mlx *mlx);
+void	load_map(t_map *map);
 
 //get_next_line//
 

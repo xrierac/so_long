@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:16:13 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/28 10:45:12 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:30:42 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int check_char(t_map *map)
 	   return (-1);
 	return (0);
 }	
-
 
 int	check_map_line(t_map *map)
 {
@@ -75,8 +74,13 @@ int	check_map_error(t_map *map)
 	{
 		if (ft_strlen(map->map[i]) != (size_t)map->width)
 			return (-1);
-		if (map->map[i][0] != 1 || map->map[i][map->width - 1] != 1)
+		if (map->map[i][0] != '1' || map->map[i][map->width - 1] != '1')
 			return (-1);
 	}
 	return (0);
+}
+
+void	flood_fill(t_map *map)
+{
+
 }
