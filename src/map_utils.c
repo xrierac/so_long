@@ -6,33 +6,11 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:16:13 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/28 12:30:42 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:44:13 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
-
-static int check_char(t_map *map)
-{
-	int	i;
-
-	i = -1;
-	map->col = 0;
-	map->exit = 0;
-	map->player = 0;
-	while (map->line[++i])
-	{
-		if (map->line[i] == 'C')
-		   map->col++;	
-		if (map->line[i] == 'E')
-			map->exit++;
-		if (map->line[i] == 'P')
-			map->player++;
-	}
-	if (map->col < 1 || map->exit != 1 || map->player != 1)
-	   return (-1);
-	return (0);
-}	
 
 int	check_map_line(t_map *map)
 {
@@ -80,7 +58,18 @@ int	check_map_error(t_map *map)
 	return (0);
 }
 
-void	flood_fill(t_map *map)
+void	player_position(t_map *map)
 {
+	int	i;
+	int	j;
+
+	i = -1;
+	while (map->map[++i])
+	{
+		j = -1;
+		while (map->map[i][++j])
+			if (map->
+
+
 
 }

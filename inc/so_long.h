@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/28 12:30:45 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:43:18 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,14 @@ typedef struct	s_map
 	int		col;
 	int		exit;
 	int		player;
+	int		x_player;
+	int		y_player;
+	int		x_exit;
+	int		y_exit;
 }	t_map;
+
+void	initialize_variables(t_map *map);
+void	get_map_info(t_map *map);
 
 //Map parsing//
 int		check_map_line(t_map *map);

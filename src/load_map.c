@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:33:02 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/28 12:30:40 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:38:30 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ void	load_map(t_map *map)
 	   exit_error("Wrong map format\n", map);	
 	split_map(map);
 	if (check_map_error(map) == -1)
+		exit_error("Wrong map format\n", map);
+	get_map_info(map);
+	if (map->col < 1 || map->exit != 1 || map->player != 1)
 		exit_error("Wrong map format\n", map);
 	if (close(fd) == -1)
 		exit_error("Error closing the file\n", map);
