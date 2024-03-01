@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/29 15:43:18 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:40:12 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct	s_map
 {
 	int		width;
 	int		height;
-	char	*path;
 	char 	*line;
 	char	**map;
 	int		col;
@@ -49,7 +48,6 @@ typedef struct	s_map
 }	t_map;
 
 void	initialize_variables(t_map *map);
-void	get_map_info(t_map *map);
 
 //Map parsing//
 int		check_map_line(t_map *map);
@@ -58,7 +56,7 @@ int		check_path(char *str);
 
 void	exit_error(char *str, t_map *map);
 int		map_error(char *str);
-void	load_map(t_map *map);
+void	load_map(t_map *map, char *path);
 
 //get_next_line//
 
