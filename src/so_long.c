@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:28:41 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/01 10:23:48 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:47:00 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ void	exit_error(char *msg, t_map *map)
 int	main(int argc, char *argv[])
 {
 	t_map		map;
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	xpm_t		*xpm;
 	int		i;
 
 	i = 0;
@@ -54,26 +51,12 @@ int	main(int argc, char *argv[])
 	if (check_path(argv[1]) == -1)
 		exit_error("Wrong map file\n", &map);
 	load_map(&map, argv[1]);
-	// Start mlx
-	mlx = mlx_init(SQ_SIZE * map.width, SQ_SIZE * map.height, "Pocketmon", true);
-	if (!mlx)
-        exit_error("Couldn't start MLX\n", &map);
-	ft_printf("Width: %d Height: %d\n", map.width, map.height);
-	//Import iamge
-	xpm = mlx_load_xpm42("./textures/npc.xpm42");
-	if (!xpm)
-		exit_error("Error loading image\n", &map);
-	// Create a new image
-	img = mlx_texture_to_image(mlx, &xpm->texture);
-	if (!img)
-		exit_error(" ", &map);
-	if (mlx_image_to_window(mlx, img, 0, 0) < 0)
-		exit_error(" ", &map);
-	mlx_loop(mlx);
+	display(map);
 	while (map.map[i])
 	{
 		ft_printf("%s\n", map.map[i]);
 		i++;
 	}
+	ft_free_array(map.map);
 	return (0);
 }
