@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:16:13 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/29 15:44:13 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:41:33 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,28 @@ int	check_map_line(t_map *map)
 			return (-1);
 	}
 	if (map->line[0] == '\n' || map->line[ft_strlen(map->line) - 1] == '\n')
-			return (-1);
-	return (check_char(map));
+		return (-1);
+	return (0);
 }
 
-int	check_path(char *str)
+int	check_path(char *path)
 {
 	int		len;
 	char	*substr;
+	int		fd;
 
-	len = ft_strlen(str);
-	if (len < 5)
+	len = ft_strlen(path);
+	substr = &path[len - 4];
+	if (len < 5 || path[len - 5] == '/')
 		return (-1);
-	substr = &str[len - 4];
 	if (ft_strncmp(substr, ".ber", 4) != 0)
 		return (-1);
+	fd = open(path, O_DIRECTORY);
+	if (fd != -1)
+	{
+		close(fd);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -56,20 +63,4 @@ int	check_map_error(t_map *map)
 			return (-1);
 	}
 	return (0);
-}
-
-void	player_position(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (map->map[++i])
-	{
-		j = -1;
-		while (map->map[i][++j])
-			if (map->
-
-
-
 }
