@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/01 11:22:57 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:37:33 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "../lib/libft/libft.h"
 
 # ifndef SQ_SIZE
-#  define SQ_SIZE 64
+#  define SQ_SIZE 50
 # endif
 
 # ifndef BUFFER_SIZE
@@ -47,7 +47,17 @@ typedef struct	s_map
 	int		y_exit;
 }	t_map;
 
+typedef struct	s_img
+{
+	mlx_image_t	*tree;
+	mlx_image_t	*poke;
+	mlx_image_t	*ash;
+	mlx_image_t	*exit;
+	mlx_image_t	*floor;
+}	t_img;
+
 void	initialize_variables(t_map *map);
+void	import_images(mlx_t *mlx, t_img *img);
 
 //Map parsing//
 int		check_map_line(t_map *map);
