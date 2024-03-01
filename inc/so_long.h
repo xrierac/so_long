@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/01 10:40:12 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:22:57 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ int		check_path(char *str);
 void	exit_error(char *str, t_map *map);
 int		map_error(char *str);
 void	load_map(t_map *map, char *path);
+
+//MLX//
+void	display(t_map map);
 
 //get_next_line//
 
