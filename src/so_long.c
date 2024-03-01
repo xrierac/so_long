@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:28:41 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/02/28 12:30:37 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:23:48 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int	main(int argc, char *argv[])
 	i = 0;
 	if (argc != 2)
 		return (write(2, "Wrong number of arguments\n", 26));
+	initialize_variables(&map);
 	if (check_path(argv[1]) == -1)
 		exit_error("Wrong map file\n", &map);
-	map.path = argv[1];
-	load_map(&map);
+	load_map(&map, argv[1]);
 	// Start mlx
 	mlx = mlx_init(SQ_SIZE * map.width, SQ_SIZE * map.height, "Pocketmon", true);
 	if (!mlx)
