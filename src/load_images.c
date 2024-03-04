@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:27:39 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/04 10:29:34 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:44:54 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static	mlx_image_t	*load_image(char *path, mlx_t *mlx)
 		exit_error("Problem loading image\n", NULL);
 	img = mlx_texture_to_image(mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
+	if (mlx_resize_image(img, SQ_SIZE, SQ_SIZE) != 1)
+		exit_error("Problem resizing the image\n", NULL);
 	return (img);
 }
 
