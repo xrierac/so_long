@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/04 12:20:54 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:45:41 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "../lib/libft/libft.h"
 
 # ifndef SQ_SIZE
-#  define SQ_SIZE 90
+#  define SQ_SIZE 50
 # endif
 
 # ifndef BUFFER_SIZE
@@ -38,6 +38,15 @@ typedef struct	s_point
 	int	y;
 }	t_point;
 
+typedef struct	s_img
+{
+	mlx_image_t	*tree;
+	mlx_image_t	*poke;
+	mlx_image_t	*ash;
+	mlx_image_t	*exit;
+	mlx_image_t	*floor;
+}	t_img;
+
 typedef struct	s_map
 {
 	int		width;
@@ -51,19 +60,13 @@ typedef struct	s_map
 	int		y_player;
 	int		x_exit;
 	int		y_exit;
+	t_img	*img;
 }	t_map;
-
-typedef struct	s_img
-{
-	mlx_image_t	*tree;
-	mlx_image_t	*poke;
-	mlx_image_t	*ash;
-	mlx_image_t	*exit;
-	mlx_image_t	*floor;
-}	t_img;
 
 void	initialize_variables(t_map *map);
 t_img	*import_images(mlx_t *mlx);
+void	my_keyhook(mlx_key_data_t keydata, t_map *map);
+void	move(int x, int y, t_map *map);
 
 //Map parsing//
 int		check_map_line(t_map *map);
@@ -75,7 +78,7 @@ int		map_error(char *str);
 void	load_map(t_map *map, char *path);
 
 //MLX//
-void	display(t_map map);
+void	display(t_map *map);
 
 //get_next_line//
 
