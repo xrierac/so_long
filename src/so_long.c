@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:28:41 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/04 12:28:42 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:47:09 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	exit_error(char *msg, t_map *map)
 */
 int	main(int argc, char *argv[])
 {
-	t_map	map;
+	t_map	*map;
 	int		i;
 
 	i = 0;
@@ -51,7 +51,7 @@ int	main(int argc, char *argv[])
 	if (check_path(argv[1]) == -1)
 		exit_error("Wrong map file\n", &map);
 	load_map(&map, argv[1]);
-	display(map);
+	display(&map);
 	while (map.map[i])
 	{
 		ft_printf("%s\n", map.map[i]);
