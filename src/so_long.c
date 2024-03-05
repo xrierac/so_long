@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:28:41 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/05 16:33:09 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:06:15 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int	main(int argc, char *argv[])
 	if (check_path(argv[1]) == -1)
 		exit_error("Wrong map file\n", &map);
 	load_map(&map, argv[1]);
+	while (map.copy[i])
+	{
+		ft_printf("%s\n", map.copy[i]);
+		i++;
+	}
 	map.w_width = map.width * SIZE;
 	map.w_height = map.height * SIZE;
 	display(&map);
-	while (map.map[i])
-	{
-		ft_printf("%s\n", map.map[i]);
-		i++;
-	}
 	ft_free_array(map.map);
 	ft_free_array(map.copy);
 	free(map.img);

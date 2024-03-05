@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:33:02 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/05 16:30:03 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:59:02 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void	load_map(t_map *map, char *path)
 	if (get_map_info(map) == -1 || map->col < 1)
 		exit_error("Wrong number of objects\n", map);
 	find_player(map);
+	flood_fill(map, map->ply.x, map->ply.y);
 }
