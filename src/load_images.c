@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:27:39 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/05 10:11:04 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:55:04 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ t_img	*import_images(t_map *map)
 	img->ash = load_image("./textures/npc.xpm42", map);
 	img->exit = load_image("./textures/imgexit.xpm42", map);
 	img->floor = load_image("./textures/fond.xpm42", map);
+	img->ashrmv = load_image("./textures/npcrightmv.xpm42", map);
+	img->ashlmv = load_image("./textures/npcleftmv.xpm42", map);
+	img->ashbmv = load_image("./textures/npcbackmv.xpm42", map);
 	return (img);
 }

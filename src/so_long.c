@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:28:41 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/05 10:34:05 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:33:09 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	exit_error(char *msg, t_map *map)
 		free(map->line);
 	if (map->map != NULL)
 		ft_free_array(map->map);
+	if (map->copy != NULL)
+		ft_free_array(map->copy);
 	if (map->mlx != NULL)
 		mlx_terminate(map->mlx);
-	ft_putstr_fd("so_long: Error: ", 2);
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(msg, 2);
 	exit(EXIT_FAILURE);
 }
@@ -46,5 +48,7 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 	ft_free_array(map.map);
+	ft_free_array(map.copy);
+	free(map.img);
 	return (0);
 }

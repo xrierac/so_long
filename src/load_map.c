@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:33:02 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/05 10:33:38 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:30:03 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ static void	split_map(t_map *map)
 {
 	map->map = ft_split(map->line, '\n');
 	if (map->map == NULL)
+		exit_error("Malloc failed\n", map);
+	map->copy = ft_split(map->line, '\n');
+	if (map->copy == NULL)
 		exit_error("Malloc failed\n", map);
 	free(map->line);
 	map->line = NULL;
@@ -94,4 +97,5 @@ void	load_map(t_map *map, char *path)
 		exit_error("Wrong map format\n", map);
 	if (get_map_info(map) == -1 || map->col < 1)
 		exit_error("Wrong number of objects\n", map);
+	find_player(map);
 }
