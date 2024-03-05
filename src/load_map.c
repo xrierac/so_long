@@ -6,17 +6,21 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:33:02 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/01 10:41:13 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:33:38 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	get_map_info(t_map *map)
+static int	get_map_info(t_map *map)
 {
 	int	i;
 	int	j;
+	int	player;
+	int	exit;
 
+	player = 0;
+	exit = 0;
 	i = -1;
 	while (map->map[++i])
 	{
@@ -26,19 +30,14 @@ static void	get_map_info(t_map *map)
 			if (map->map[i][j] == 'C')
 				map->col++;
 			if (map->map[i][j] == 'E')
-			{
-				map->exit++;
-				map->x_exit = j;
-				map->y_exit = i;
-			}
+				exit++;
 			if (map->map[i][j] == 'P')
-			{
-				map->player++;
-				map->x_player = j;
-				map->y_player = i;
-			}
+				player++;
 		}
 	}
+	if (player != 1 || exit != 1)
+		return (-1);
+	return (0);
 }
 
 static void	split_map(t_map *map)
@@ -85,15 +84,14 @@ void	load_map(t_map *map, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		exit_error("Could not open the map\n", map);
-	if (get_line(map, fd) == -1 || map->height == 0)
-		exit_error("Wrong map format\n", map);
+	if (get_line(map, fd) == -1)
+		exit_error("Malloc failed\n", map);
 	close(fd);
-	if (check_map_line(map) == -1)
+	if (map->height == 0 || check_map_line(map) == -1)
 		exit_error("Wrong map format\n", map);
 	split_map(map);
 	if (check_map_error(map) == -1)
 		exit_error("Wrong map format\n", map);
-	get_map_info(map);
-	if (map->col < 1 || map->exit != 1 || map->player != 1)
-		exit_error("Wrong number of instances\n", map);
+	if (get_map_info(map) == -1 || map->col < 1)
+		exit_error("Wrong number of objects\n", map);
 }

@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:16:13 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/01 10:41:33 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:33:21 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	check_path(char *path)
 
 int	check_map_error(t_map *map)
 {
-	int		i;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (map->map[++i])
@@ -61,6 +62,13 @@ int	check_map_error(t_map *map)
 			return (-1);
 		if (map->map[i][0] != '1' || map->map[i][map->width - 1] != '1')
 			return (-1);
+		if (i == 0 || i == map->height - 1)
+		{
+			j = -1;
+			while (map->map[i][++j])
+				if (map->map[i][j] != '1')
+					return (-1);
+		}
 	}
 	return (0);
 }
