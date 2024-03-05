@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/04 16:45:41 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:07:34 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "MLX42/MLX42.h"
 # include "../lib/libft/libft.h"
 
-# ifndef SQ_SIZE
-#  define SQ_SIZE 50
+# ifndef SIZE
+#  define SIZE 50
 # endif
 
 # ifndef BUFFER_SIZE
@@ -54,18 +54,16 @@ typedef struct	s_map
 	char 	*line;
 	char	**map;
 	int		col;
-	int		exit;
-	int		player;
-	int		x_player;
-	int		y_player;
-	int		x_exit;
-	int		y_exit;
 	t_img	*img;
+	t_point	ply;
+	mlx_t	*mlx;
+	int		w_width;
+	int		w_height;
 }	t_map;
 
 void	initialize_variables(t_map *map);
-t_img	*import_images(mlx_t *mlx);
-void	my_keyhook(mlx_key_data_t keydata, t_map *map);
+t_img	*import_images(t_map *map);
+void	my_keyhook(mlx_key_data_t keydata, void *map);
 void	move(int x, int y, t_map *map);
 
 //Map parsing//
