@@ -6,16 +6,13 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/06 09:45:15 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:08:04 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include "MLX42/MLX42.h"
 # include "../lib/libft/libft.h"
