@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:16:13 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/05 17:15:32 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:54:31 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,36 @@ int	check_map_error(t_map *map)
 	return (0);
 }
 
-void	flood_fill(t_map *map, int startx, int starty)
+void	flood_fill(t_map *map, int x, int y)
+{
+	if (map->copy[y][x] == '1' || map->copy[y][x] == '2')
+		return ;
+	map->copy[y][x] = '2';
+	flood_fill(map, x + 1, y);
+	flood_fill(map, x - 1, y);
+	flood_fill(map, x, y + 1);
+	flood_fill(map, x, y - 1);
+}
+
+int	test_flood(t_map *map)
 {
 	t_point	p;
 
-	p.x = startx;
-	p.y = starty;
-	if (map->copy[p.y][p.x] == '1' || map->copy[p.y][p.x] == '2')
-		return ;
-	ft_printf("%d %d\n", startx, starty);
-	map->copy[p.y][p.x] = '2';
-	if (map->copy[p.y][p.x++] != '1') 
-		flood_fill(map, p.x++, p.y);
-	if (map->copy[p.y][p.x--] != '1') 
-	flood_fill(map, p.x--, p.y);
-	if (map->copy[p.y++][p.x++] != '1') 
-	flood_fill(map, p.x, p.y++);
-	if (map->copy[p.y--][p.x] != '1') 
-	flood_fill(map, p.x, p.y--);
+	p.x = -1;
+	while (map->copy[++p.x])
+	{
+		p.y = -1;
+		while (map->copy[p.x][++p.y])
+		{
+			if (map->copy[p.x][p.y] != '1' && map->copy[p.x][p.y] != '2')
+			{
+				ft_free_array(map->copy);
+				map->copy = NULL;
+				return (-1);
+			}
+		}
+	}
+	ft_free_array(map->copy);
+	map->copy = NULL;
+	return (0);
 }

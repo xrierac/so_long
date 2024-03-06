@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:58:25 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/05 16:46:18 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:45:15 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	find_player(t_map *map);
 void	exit_error(char *str, t_map *map);
 int		map_error(char *str);
 void	load_map(t_map *map, char *path);
-void	flood_fill(t_map *map, int startx, int starty);
+void	flood_fill(t_map *map, int x, int y);
+int		test_flood(t_map *map);
 
 //MLX//
 void	display(t_map *map);
