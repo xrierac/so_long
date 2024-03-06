@@ -6,6 +6,7 @@ CC		:= cc
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 
 LIBMLX	:= ./lib/MLX42
+SRCDIR  := ./src
 
 #Libft#
 
@@ -15,7 +16,12 @@ LIBFT		:= $(LIBFT_DIR)/libft.a
 HEADERS	:= -I ./inc -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -L"/Users/$(USER)/.brew/opt/glfw/lib" \
 			-ldl -lglfw -pthread -lm $(LIBFT)
-SRCS	:= $(shell find ./src -iname "*.c")
+			
+SRCS	:= $(SRCDIR)/actions.c $(SRCDIR)/display.c $(SRCDIR)/get_next_line.c \
+		$(SRCDIR)/hook.c $(SRCDIR)/initialize.c $(SRCDIR)/load_images.c \
+		$(SRCDIR)/load_map.c $(SRCDIR)/map_utils.c $(SRCDIR)/move.c \
+		$(SRCDIR)/so_long.c
+
 OBJS	:= ${SRCS:.c=.o}
 
 all: libmlx $(LIBFT) $(NAME)
