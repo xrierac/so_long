@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:28:41 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/06 10:00:32 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:54:56 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	main(int argc, char *argv[])
 	if (check_path(argv[1]) == -1)
 		exit_error("Wrong map file\n", &map);
 	load_map(&map, argv[1]);
+	if (map.width * SIZE > 6000 || map.height * SIZE > 3880)
+		exit_error("Map is too big.\n", &map);
 	map.w_width = map.width * SIZE;
 	map.w_height = map.height * SIZE;
 	display(&map);
