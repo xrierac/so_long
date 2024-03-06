@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 11:16:58 by xriera-c          #+#    #+#             */
-/*   Updated: 2024/03/05 16:16:47 by xriera-c         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:22:22 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	create_player(t_map *map)
 
 void	display(t_map *map)
 {
-	map->mlx = mlx_init(map->w_width, map->w_height, "So_Long", true);
+	map->mlx = mlx_init(map->w_width, map->w_height, "So_Long", false);
 	if (!map->mlx)
 		exit_error("Couldn't start MLX\n", map);
 	map->img = import_images(map);
